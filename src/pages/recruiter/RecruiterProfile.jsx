@@ -73,13 +73,12 @@ const RecruiterProfile = () => {
     }
 
     if (profile.companyWebsite) {
-      const urlPattern =
-        /^(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})([\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+)?$/;
-
-      if (!urlPattern.test(profile.companyWebsite)) {
-        newErrors.companyWebsite = "Enter valid website URL";
-      }
-    }
+  try {
+    new URL(profile.companyWebsite);
+  } catch {
+    newErrors.companyWebsite = "Enter valid website URL";
+  }
+}
 
     return newErrors;
   };
